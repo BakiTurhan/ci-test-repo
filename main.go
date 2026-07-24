@@ -4,24 +4,22 @@ import (
 	"fmt"
 
 	"github.com/go-playground/validator/v10"
+	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-type User struct {
-	Email string `validate:"required,email"`
-}
-
 func main() {
-	// Validator'ı kullanalım
-	validate := validator.New()
-	user := User{Email: "test@test.com"}
-	err := validate.Struct(user)
-	if err != nil {
-		fmt.Println("Validation error:", err)
-	}
+	// Go'nun kütüphaneleri "kullanılmıyor" diye silmemesi için hepsini sahte olarak çağırıyoruz
+	_ = validator.New()
+	_ = fiber.New()
+	_ = jwt.New(jwt.SigningMethodHS256)
+	_ = godotenv.Load()
+	_, _ = bcrypt.GenerateFromPassword([]byte("test"), 10)
+	_, _ = gorm.Open(postgres.Open("dsn"), &gorm.Config{})
 
-	// Crypto'yu kullanalım
-	password := []byte("gizlisifre")
-	hashedPassword, _ := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
-	fmt.Println("Hashed password:", string(hashedPassword))
+	fmt.Println("Tüm kütüphaneler başarıyla import edildi!")
 }
