@@ -1,3 +1,3 @@
-module ci-test-repo
+module github.com/VirtusRnD/i_featureflow
 
-go 1.26.4
+go 1.22.0
