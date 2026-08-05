@@ -95,4 +95,4 @@ jobs:
           TEST_MODE: smoke
           API_URL: http://localhost:3000/api/v1
         with:
-          filename: tests/load/auth_test.js
+          filename: auth_test.js
