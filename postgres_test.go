@@ -8,7 +8,6 @@ import (
 )
 
 func TestPostgresConnectionInCI(t *testing.T) {
-	// CI sunucusunda ayağa kalkan PostgreSQL'e bağlanıyoruz
 	dsn := "host=localhost user=postgres password=password dbname=featureflow_test port=5432 sslmode=disable"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
